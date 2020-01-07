@@ -27,7 +27,9 @@ int main(int argc,char **argv)
   if(help) return 0;
   //Load an image
   const CImg<int> image1(file_i1);
+image1.display_graph("image 1");
         CImg<int> image2(file_i2);
+
   if(operation=="maximum")
   {
     image2.max(image1);
@@ -38,6 +40,7 @@ int main(int argc,char **argv)
     CImg<int> image(image1-image2);
     image.save(file_o);
   }
+
   return 0;
 }
 
