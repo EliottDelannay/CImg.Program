@@ -28,7 +28,9 @@ int main(int argc,char **argv)
   //Load an image
   const CImg<int> image1(file_i1);
 image1.display_graph("image 1");
-        CImg<int> image2(file_i2);
+
+   	CImg<int> image2(file_i2);
+image2.display_graph("image 2");
 
   if(operation=="maximum")
   {
