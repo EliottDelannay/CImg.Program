@@ -27,17 +27,18 @@ int main(int argc,char **argv)
   if(help) return 0;
   //create a image depending of what is chosen ie (baseline, simulation)
   const std::string signal=cimg_option("--signal","baseline","image signal either baseline, simulation or files");
-  //Load an image
-  int baseline = 32;
-  int width = 20;
-  
-  int height= 150;
-  int w1 = 12;
-  int w2 = 15;
+  //Variables chosen by the user
+   int width=cimg_option("-w",20,"width of the signal");
+   int baseline=cimg_option("-bl",32,"numbers of the constant");
+   int height=cimg_option("-he",100,"height of the signal");
+   int startsignal=cimg_option("-ss",10,"width number of the beginning signal");
+   int endsignal=cimg_option("-es",15,"width number of the end signal");
 
+  //constructors of images
   CImg<float> image1;
   CImg<float> image2;
   CImg<float> imageR;
+
   //Signal display
   if(signal=="baseline")
   {
@@ -51,13 +52,14 @@ int main(int argc,char **argv)
   else if (signal=="simulation")
   {
     image1.assign(width,1,1,1, baseline);
-    cimg_for_inX(image1,w1,w2,i) image1(i)=height+baseline;
+    cimg_for_inX(image1,startsignal,endsignal,i) image1(i)=height+baseline;
     image1.display_graph("image 1");
     image2.assign(width,1,1,1,baseline);
     image2.display_graph("image 2");
   }
   else
   {
+    //Load an image
     image1.load(file_i1);
     image1.display_graph("image 1");
     image2.load(file_i2);
