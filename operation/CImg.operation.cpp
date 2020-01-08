@@ -30,6 +30,10 @@ int main(int argc,char **argv)
   //Load an image
   int baseline = 32;
   int width = 20;
+  
+  int height= 150;
+  int w1 = 12;
+  int w2 = 15;
 
   CImg<float> image1;
   CImg<float> image2;
@@ -37,8 +41,17 @@ int main(int argc,char **argv)
   //Signal display
   if(signal=="baseline")
   {
-
     image1.assign(width,1,1,1, baseline);
+    image1.display_graph("image 1");
+    image2.assign(width,1,1,1);
+    //image2.fill(baseline);
+    cimg_forX(image2,i) image2(i)=baseline;
+    image2.display_graph("image 2");
+  }
+  else if (signal=="simulation")
+  {
+    image1.assign(width,1,1,1, baseline);
+    cimg_for_inX(image1,w1,w2,i) image1(i)=height+baseline;
     image1.display_graph("image 1");
     image2.assign(width,1,1,1,baseline);
     image2.display_graph("image 2");
