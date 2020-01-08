@@ -23,16 +23,18 @@ int main(int argc,char **argv)
   const char* file_o =cimg_option("-o" ,"imageS.PNG","Output image: either maximum R=max(1,2),minimum R=min(1,2),division R=1/2 or substraction R=1-2");
   //help
   const bool help=cimg_option("-h",false,"display this help.");
-  //exit on help request '-h' command line option
-  if(help) return 0;
+  
   //create a image depending of what is chosen ie (baseline, simulation)
-  const std::string signal=cimg_option("--signal","baseline","image signal either baseline, simulation or files");
+  const std::string signal=cimg_option("--source","files","image signal either baseline, simulation or files");
   //Variables chosen by the user
    int width=cimg_option("-w",20,"width of the signal");
    int baseline=cimg_option("-bl",32,"numbers of the constant");
    int height=cimg_option("-he",100,"height of the signal");
    int startsignal=cimg_option("-ss",10,"width number of the beginning signal");
    int endsignal=cimg_option("-es",15,"width number of the end signal");
+
+  //exit on help request '-h' command line option
+  if(help) return 0;
 
   //constructors of images
   CImg<float> image1;
@@ -64,6 +66,7 @@ int main(int argc,char **argv)
     image1.display_graph("image 1");
     image2.load(file_i2);
     image2.display_graph("image 2");
+    width = image1._width;
   }
 
   //Operation on images
