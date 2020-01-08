@@ -37,7 +37,7 @@ int main(int argc,char **argv)
 
   CImg<float> image1;
   CImg<float> image2;
-
+  CImg<float> imageR;
   //Signal display
   if(signal=="baseline")
   {
@@ -67,28 +67,31 @@ int main(int argc,char **argv)
   //Operation on images
   if(operation=="maximum")
   {
-    image2.max(image1);
-    image2.save(file_o);
-    image2.display_graph("maximum");
+    imageR=image2.max(image1);
+    imageR.save(file_o);
+    imageR.display_graph("maximum");
   }
   else if (operation=="division")
   {
-    const  CImg<float> image(image1/image2);
-    image.save(file_o);
-    image.display_graph("division");
+    imageR=(image1/image2);
+    imageR.save(file_o);
+    imageR.display_graph("division");
   }
   else if (operation=="minimum")
   {
-    image2.min(image1);
-    image2.save(file_o);
-    image2.display_graph("minimum");  
+    imageR=image2.min(image1);
+    imageR.save(file_o);
+    imageR.display_graph("minimum");  
   }
   else
   {
-    CImg<int> image(image1-image2);
-    image.save(file_o);
-    image.display_graph("subtraction");
+    imageR=(image1-image2);
+    imageR.save(file_o);
+    imageR.display_graph("subtraction");
   }
+  image1.print("image 1");
+  image2.print("image 2");
+  imageR.print("image result");
   return 0;
 }
 
