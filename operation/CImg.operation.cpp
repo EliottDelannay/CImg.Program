@@ -36,11 +36,25 @@ image2.display_graph("image 2");
   {
     image2.max(image1);
     image2.save(file_o);
+    image2.display_graph("maximum");
+  }
+  else if (operation=="division")
+  {
+    const  CImg<float> image(image1/image2);
+    image.save(file_o);
+    image.display_graph("division");
+  }
+  else if (operation=="minimum")
+  {
+    image2.min(image1);
+    image2.save(file_o);
+    image2.display_graph("minimum");  
   }
   else
   {
     CImg<int> image(image1-image2);
     image.save(file_o);
+    image.display_graph("subtraction");
   }
 
   return 0;
