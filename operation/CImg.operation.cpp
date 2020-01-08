@@ -75,7 +75,8 @@ int main(int argc,char **argv)
   }
   else if (operation=="division")
   {
-    imageR=(image1/image2);
+    imageR.assign(width);
+    cimg_forX(imageR,i) imageR(i)=(image1(i)/image2(i));
     imageR.save(file_o);
     imageR.display_graph("division");
   }
