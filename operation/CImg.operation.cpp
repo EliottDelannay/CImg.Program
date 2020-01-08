@@ -26,30 +26,32 @@ int main(int argc,char **argv)
   //exit on help request '-h' command line option
   if(help) return 0;
   //create a image depending of what is chosen ie (baseline, simulation)
-//  const std::string signal=cimg_option("--signal","baseline","image signal either baseline, simulation or files");
+  const std::string signal=cimg_option("--signal","baseline","image signal either baseline, simulation or files");
   //Load an image
   int baseline = 32;
   int width = 20;
 
-/*
+  CImg<float> image1;
+  CImg<float> image2;
+
+  //Signal display
   if(signal=="baseline")
   {
-*/
-    CImg<float> image1(width,1,1,1,baseline);
+
+    image1.assign(width,1,1,1, baseline);
     image1.display_graph("image 1");
-    CImg<unsigned char> image2 (width,1,1,1,baseline);
+    image2.assign(width,1,1,1,baseline);
     image2.display_graph("image 2");
-/*
   }
   else
   {
-    const CImg<int> image1(file_i1);
+    image1.load(file_i1);
     image1.display_graph("image 1");
-    const CImg<int> image2(file_i2);
+    image2.load(file_i2);
     image2.display_graph("image 2");
   }
-*/
 
+  //Operation on images
   if(operation=="maximum")
   {
     image2.max(image1);
@@ -74,7 +76,6 @@ int main(int argc,char **argv)
     image.save(file_o);
     image.display_graph("subtraction");
   }
-
   return 0;
 }
 
