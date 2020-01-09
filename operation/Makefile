@@ -1,6 +1,7 @@
+OPT_CIMG = -lpthread -Dcimg_use_vt100 -I../../CImg -Wall -W -lm -ansi -pedantic -fno-tree-pre
 OPT_XWINDOWS = -I/usr/X11R6/include -Dcimg_use_xshm -Dcimg_use_xrandr -L/usr/X11R6/lib -lX11 -lXext -lXrandr
-#OPT = -Dcimg_display=0 -Dcimg_debug=2 -Dcimg_use_vt100
-OPT = $(OPT_XWINDOWS) -lpthread -Dcimg_debug=2 -Dcimg_use_vt100 -I../../CImg -Wall -W -lm -ansi -pedantic -fno-tree-pre
+OPT = -Dcimg_display=0 $(OPT_CIMG) -Dcimg_debug=2
+#OPT = $(OPT_XWINDOWS) $(OPT_CIMG) -Dcimg_debug=2
 CC = gcc
 CPP = g++ -O0
 

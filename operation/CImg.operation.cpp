@@ -45,27 +45,39 @@ int main(int argc,char **argv)
   if(signal=="baseline")
   {
     image1.assign(width,1,1,1, baseline);
-    image1.display_graph("image 1");
+    #if (cimg_display!=0)
+       image1.display_graph("image 1");
+    #endif    
     image2.assign(width,1,1,1);
     //image2.fill(baseline);
     cimg_forX(image2,i) image2(i)=baseline;
-    image2.display_graph("image 2");
+    #if cimg_display!=0   
+       image2.display_graph("image 2");
+    #endif
   }
   else if (signal=="simulation")
   {
     image1.assign(width,1,1,1, baseline);
     cimg_for_inX(image1,startsignal,endsignal,i) image1(i)=height+baseline;
-    image1.display_graph("image 1");
-    image2.assign(width,1,1,1,baseline);
-    image2.display_graph("image 2");
+    #if cimg_display!=0
+       image1.display_graph("image 1");
+    #endif
+       image2.assign(width,1,1,1,baseline);
+    #if cimg_display!=0
+       image2.display_graph("image 2");
+    #endif
   }
   else
   {
     //Load an image
     image1.load(file_i1);
-    image1.display_graph("image 1");
+    #if (cimg_display!=0)
+       image1.display_graph("image 1");
+    #endif
     image2.load(file_i2);
-    image2.display_graph("image 2");
+    #if (cimg_display!=0)
+       image2.display_graph("image 2");
+    #endif
     width = image1._width;
   }
 
@@ -74,26 +86,34 @@ int main(int argc,char **argv)
   {
     imageR=image2.max(image1);
     imageR.save(file_o);
-    imageR.display_graph("maximum");
+    #if cimg_display!=0
+       imageR.display_graph("maximum");
+    #endif
   }
   else if (operation=="division")
   {
     imageR.assign(width);
     cimg_forX(imageR,i) imageR(i)=(image1(i)/image2(i));
     imageR.save(file_o);
-    imageR.display_graph("division");
+    #if cimg_display!=0
+       imageR.display_graph("division");
+    #endif
   }
   else if (operation=="minimum")
   {
     imageR=image2.min(image1);
     imageR.save(file_o);
-    imageR.display_graph("minimum");  
+    #if cimg_display!=0
+       imageR.display_graph("minimum");  
+    #endif
   }
   else
   {
     imageR=(image1-image2);
     imageR.save(file_o);
-    imageR.display_graph("subtraction");
+    #if cimg_display!=0
+       imageR.display_graph("subtraction");
+    #endif
   }
   image1.print("image 1");
   image2.print("image 2");
