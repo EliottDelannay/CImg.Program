@@ -48,6 +48,8 @@
 // Include CImg library file and use its main namespace
 #include "CImg.h"
 using namespace cimg_library;
+//data
+typedef float Tdata;
 
 #include <iostream>
 //debug macro
@@ -72,11 +74,11 @@ int main(int argc,char **argv)
   //create a image depending of what is chosen ie (baseline, simulation)
   const std::string signal=cimg_option("--source","files","image signal either baseline, simulation or files");
   //Variables chosen by the user
-   int width=cimg_option("-w",20,"width of the signal");
-   int baseline=cimg_option("-bl",32,"numbers of the constant");
+   int width=cimg_option("-w",20,"width of the frame");
+   int baseline=cimg_option("-bl",32,"baseline");
    int height=cimg_option("-he",100,"height of the signal");
-   int startsignal=cimg_option("-ss",10,"width number of the beginning signal");
-   int endsignal=cimg_option("-es",15,"width number of the end signal");
+   int startsignal=cimg_option("-sb",10,"signal beginning");
+   int endsignal=cimg_option("-se",15,"signal end");
 
    //Allow the user to display or print in the terminal the images
    #if cimg_display!=0
@@ -88,9 +90,9 @@ int main(int argc,char **argv)
    if(help) return 0;
 
    //constructors of images
-   CImg<float> image1;
-   CImg<float> image2;
-   CImg<float> imageR;
+   CImg<Tdata> image1;
+   CImg<Tdata> image2;
+   CImg<Tdata> imageR;
 
    //Signal display
   if(signal=="baseline")
