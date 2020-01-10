@@ -1,3 +1,48 @@
+/** \mainpage
+ *
+ *  index:
+ *  \li \ref sectionCommandLine
+ *  \li \ref sectionDisplayDocumentation
+ *
+ *  \section sectionCommandLine command line options
+ *  \verbinclude "CImg.operation.help.output"
+ *  \section sectionDisplayDocumentation documentation outline
+ *  This is the reference documentation of <a href="http://www.meol.cnrs.fr/">CImg.display</a>, from the <a href="http://www.univ-lille1.fr/lml/">LML</a>.\n\n
+ *  CImg.display is a image displaying software. The program begins in the main function in the <a href="CImg_8display_8cpp.html">CImg.display.cpp</a> source file.\n\n
+ *  This documentation has been automatically generated from the CImg.display sources, 
+ *  using the tool <a href="http://www.doxygen.org">doxygen</a>. It should be readed as HTML, LaTex and man page.\n
+ *  It contains both
+ *  \li a detailed description of all classes and functions
+ *  \li a <a href="user.html">user guide</a>
+ *
+ *  that as been documented in the sources.
+**/
+
+/** \page user user guide
+ *
+ * \todo use section (instead of paragraphs) and add table of contents (such as in mainpage)
+ *
+ * \par different type of display for image
+ *
+ * \No graphic mode
+ * \code
+  ./CImg.operation -i1 img1.png -i2 img2.png -o imgS.png -w 25 -bl 50 -he 180 -ss 10 -es 20 --operation division 
+  \endcode
+ *
+ * \With graphic mode
+ * print on the console 
+ * \code
+  ./CImg.operation.X -i1 img1.png -i2 img2.png -o imgS.png -w 25 -bl 50 -he 180 -ss 10 -es 20 --operation division
+  \endcode 
+ *
+ * display the images
+ * \code
+  ./CImg.operation.X -i1 img1.png -i2 img2.png -o imgS.png -w 25 -bl 50 -he 180 -ss 10 -es 20 --operation division --show
+  \endcode
+ 
+
+**/
+
 //STL
 #include <string>
 // Include CImg library file and use its main namespace
