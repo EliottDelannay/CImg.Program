@@ -33,51 +33,76 @@ int main(int argc,char **argv)
    int startsignal=cimg_option("-ss",10,"width number of the beginning signal");
    int endsignal=cimg_option("-es",15,"width number of the end signal");
 
-  //exit on help request '-h' command line option
-  if(help) return 0;
+   //Allow the user to display or print in the terminal the images
+   #if cimg_display!=0
+   const bool show_X=cimg_option("-X",false,NULL);//-X hidden option
+   bool show=cimg_option("--show",show_X,"show GUI (or -X option)");show=show_X|show;//same --show or -X option
+   #endif
 
-  //constructors of images
-  CImg<float> image1;
-  CImg<float> image2;
-  CImg<float> imageR;
+   //exit on help request '-h' command line option
+   if(help) return 0;
 
-  //Signal display
+   //constructors of images
+   CImg<float> image1;
+   CImg<float> image2;
+   CImg<float> imageR;
+
+   //Signal display
   if(signal=="baseline")
   {
     image1.assign(width,1,1,1, baseline);
     #if (cimg_display!=0)
-       image1.display_graph("image 1");
-    #endif    
+    if(show) image1.display_graph("image 1");
+    else
+    #endif
+    image1.print("image 1");  
+     
     image2.assign(width,1,1,1);
     //image2.fill(baseline);
     cimg_forX(image2,i) image2(i)=baseline;
     #if cimg_display!=0   
-       image2.display_graph("image 2");
+    if(show) image2.display_graph("image 2");
+    else
+//! \todo integrate print in both console and graphical compilations
     #endif
+    image2.print("image 2");
   }
   else if (signal=="simulation")
   {
     image1.assign(width,1,1,1, baseline);
     cimg_for_inX(image1,startsignal,endsignal,i) image1(i)=height+baseline;
     #if cimg_display!=0
-       image1.display_graph("image 1");
+    if(show) image1.display_graph("image 1");
+    else
     #endif
-       image2.assign(width,1,1,1,baseline);
+    image1.print("image 1");
+    
+    image2.assign(width,1,1,1,baseline);
     #if cimg_display!=0
-       image2.display_graph("image 2");
+    if(show) image2.display_graph("image 2");
+    else
+//! \todo integrate print in both console and graphical compilations
     #endif
+    image2.print("image 2");  
   }
   else
   {
     //Load an image
     image1.load(file_i1);
     #if (cimg_display!=0)
-       image1.display_graph("image 1");
+    if(show) image1.display_graph("image 1");
+    else
+//! \todo integrate print in both console and graphical compilations
     #endif
+    image1.print("image 1");   
+
     image2.load(file_i2);
     #if (cimg_display!=0)
-       image2.display_graph("image 2");
+    if(show) image2.display_graph("image 2");
+    else
+//! \todo integrate print in both console and graphical compilations
     #endif
+    image2.print("image 2"); 
     width = image1._width;
   }
 
@@ -87,8 +112,10 @@ int main(int argc,char **argv)
     imageR=image2.max(image1);
     imageR.save(file_o);
     #if cimg_display!=0
-       imageR.display_graph("maximum");
+    if(show) imageR.display_graph("maximum");
+    else
     #endif
+    imageR.print("image result");  
   }
   else if (operation=="division")
   {
@@ -96,28 +123,32 @@ int main(int argc,char **argv)
     cimg_forX(imageR,i) imageR(i)=(image1(i)/image2(i));
     imageR.save(file_o);
     #if cimg_display!=0
-       imageR.display_graph("division");
+    if(show) imageR.display_graph("division");
+    else
     #endif
+    imageR.print("image result");
+    
   }
   else if (operation=="minimum")
   {
     imageR=image2.min(image1);
     imageR.save(file_o);
     #if cimg_display!=0
-       imageR.display_graph("minimum");  
+    if(show) imageR.display_graph("minimum");  
+    else
     #endif
+    imageR.print("image result");   
   }
   else
   {
     imageR=(image1-image2);
     imageR.save(file_o);
     #if cimg_display!=0
-       imageR.display_graph("subtraction");
+    if(show) imageR.display_graph("subtraction");
+    else
     #endif
+    imageR.print("image result");   
   }
-  image1.print("image 1");
-  image2.print("image 2");
-  imageR.print("image result");
   return 0;
 }
 
